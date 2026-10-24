@@ -7,7 +7,9 @@ Ubuntu 24.04 企业多语言开发基础镜像：Python 3.12 + pip + venv、Node
 | base | 三语言、完整 JDK、apt、CA、JDK 动态库 | Java 编译、脚本、业务开发 |
 | build | base + GCC/G++/make/pkg-config/Python headers/Git/CMake/Ninja | C/C++、Python 原生扩展、Node 原生模块编译 |
 
-**发布状态：等待首次 CI 验证和 PR 审核，尚无正式发布。** 未运行的体积或扫描数据不作为实测结果。
+**状态：四组实际构建、功能测试和 ELF 检查已通过；base 安全门禁通过，build 存在 linux-libc-dev 相关安全告警，发布仍被阻断。尚未合并或正式发布。** 详见[实际验证报告](docs/validation-2026-10-24.md)。
+
+实测未压缩体积：base 为 amd64 575.84 MiB / arm64 596.69 MiB；build 为 amd64 997.96 MiB / arm64 1002.54 MiB。完整对照见[优化报告](docs/optimization.md)。
 
 ## 构建和使用
 

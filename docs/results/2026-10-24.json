@@ -1,0 +1,164 @@
+{
+  "source_head": "f45c1e62067c5cb6d5943d9324c9ae546bbf5599",
+  "run_url": "https://github.com/zkcloud/multi-runtime-base/actions/runs/40060736835",
+  "scanner": "Trivy 0.76.1",
+  "release": "not executed; security gate blocked",
+  "results": [
+    {
+      "artifact_id": 12547422304,
+      "name": "reports-base-amd64",
+      "severity_counts": {
+        "MEDIUM": 33,
+        "LOW": 6
+      },
+      "high_critical": 0,
+      "high_critical_packages": {},
+      "status_counts": {},
+      "image_id": "sha256:ce12462d2dd299cebaf546d1b2331911d6821869567a759d61c18ac05f3dc8ae",
+      "sizes": {
+        "variant": "base",
+        "architecture": "amd64",
+        "measured_at": "2026-10-24T04:03:34.717430+00:00",
+        "commit": "069115e95925d50b37216ad86935d9c2f7dd1cc7",
+        "metric": "docker image inspect .Size (uncompressed image content bytes)",
+        "package_versions_equal": true,
+        "baseline_bytes": 661311289,
+        "optimized_bytes": 603811358,
+        "saved_bytes": 57499931,
+        "saved_percent": 8.695,
+        "baseline_id": "sha256:623a8b75b51555c68a39b341917fce80b65ab8f4e445ed3b9d147e2a0deb148d",
+        "optimized_id": "sha256:ce12462d2dd299cebaf546d1b2331911d6821869567a759d61c18ac05f3dc8ae",
+        "compressed_registry_bytes": null
+      },
+      "functional": "passed",
+      "elf_objects_checked": 1703,
+      "sbom_package_count": 282,
+      "sbom_format": "SPDX-2.3",
+      "upstream": {
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964",
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac"
+      }
+    },
+    {
+      "artifact_id": 12546989216,
+      "name": "reports-base-arm64",
+      "severity_counts": {
+        "MEDIUM": 33,
+        "LOW": 6
+      },
+      "high_critical": 0,
+      "high_critical_packages": {},
+      "status_counts": {},
+      "image_id": "sha256:8f3ada88245e49878a64f7755ffccced8f6238eb27f414a7041ff2f870a8b88f",
+      "sizes": {
+        "variant": "base",
+        "architecture": "arm64",
+        "measured_at": "2026-10-24T04:03:29.767294+00:00",
+        "commit": "069115e95925d50b37216ad86935d9c2f7dd1cc7",
+        "metric": "docker image inspect .Size (uncompressed image content bytes)",
+        "package_versions_equal": true,
+        "baseline_bytes": 686658543,
+        "optimized_bytes": 625678651,
+        "saved_bytes": 60979892,
+        "saved_percent": 8.881,
+        "baseline_id": "sha256:7aebfd544ac78ec122cce0bb203d0c90e64f317528092222bfc4798d29cde593",
+        "optimized_id": "sha256:8f3ada88245e49878a64f7755ffccced8f6238eb27f414a7041ff2f870a8b88f",
+        "compressed_registry_bytes": null
+      },
+      "functional": "passed",
+      "elf_objects_checked": 1700,
+      "sbom_package_count": 282,
+      "sbom_format": "SPDX-2.3",
+      "upstream": {
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964",
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac"
+      }
+    },
+    {
+      "artifact_id": 12547685547,
+      "name": "reports-build-amd64",
+      "severity_counts": {
+        "MEDIUM": 1969,
+        "LOW": 714,
+        "CRITICAL": 14,
+        "HIGH": 372
+      },
+      "high_critical": 386,
+      "high_critical_packages": {
+        "linux-libc-dev": 386
+      },
+      "status_counts": {
+        "affected": 386
+      },
+      "image_id": "sha256:6ef0417f9bdaf0820c4b69d5067c8867ea8f9d90af710badcd84fc32a7e20235",
+      "sizes": {
+        "variant": "build",
+        "architecture": "amd64",
+        "measured_at": "2026-10-24T04:04:07.578214+00:00",
+        "commit": "069115e95925d50b37216ad86935d9c2f7dd1cc7",
+        "metric": "docker image inspect .Size (uncompressed image content bytes)",
+        "package_versions_equal": true,
+        "baseline_bytes": 1103935084,
+        "optimized_bytes": 1046435153,
+        "saved_bytes": 57499931,
+        "saved_percent": 5.209,
+        "baseline_id": "sha256:0b5e67428637086cebc43d992a744d561a738ebaef8b87ea3d570f3e886be240",
+        "optimized_id": "sha256:6ef0417f9bdaf0820c4b69d5067c8867ea8f9d90af710badcd84fc32a7e20235",
+        "compressed_registry_bytes": null
+      },
+      "functional": "passed",
+      "elf_objects_checked": 2689,
+      "sbom_package_count": 372,
+      "sbom_format": "SPDX-2.3",
+      "upstream": {
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964",
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac"
+      }
+    },
+    {
+      "artifact_id": 12546909527,
+      "name": "reports-build-arm64",
+      "severity_counts": {
+        "MEDIUM": 1969,
+        "LOW": 714,
+        "CRITICAL": 14,
+        "HIGH": 372
+      },
+      "high_critical": 386,
+      "high_critical_packages": {
+        "linux-libc-dev": 386
+      },
+      "status_counts": {
+        "affected": 386
+      },
+      "image_id": "sha256:47fc488cb559e4c6456dabbd75506b4f19e0770ba7abe3651fbf7024a7c8d211",
+      "sizes": {
+        "variant": "build",
+        "architecture": "arm64",
+        "measured_at": "2026-10-24T04:04:04.146261+00:00",
+        "commit": "069115e95925d50b37216ad86935d9c2f7dd1cc7",
+        "metric": "docker image inspect .Size (uncompressed image content bytes)",
+        "package_versions_equal": true,
+        "baseline_bytes": 1112223332,
+        "optimized_bytes": 1051243440,
+        "saved_bytes": 60979892,
+        "saved_percent": 5.483,
+        "baseline_id": "sha256:6d6d01080119c89480a98bfed906bf733d53efed0e275d7d4cf184938134c919",
+        "optimized_id": "sha256:47fc488cb559e4c6456dabbd75506b4f19e0770ba7abe3651fbf7024a7c8d211",
+        "compressed_registry_bytes": null
+      },
+      "functional": "passed",
+      "elf_objects_checked": 2674,
+      "sbom_package_count": 371,
+      "sbom_format": "SPDX-2.3",
+      "upstream": {
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964",
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac"
+      }
+    }
+  ]
+}
