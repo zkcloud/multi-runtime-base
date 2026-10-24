@@ -26,6 +26,6 @@ Trivy 对 HIGH/CRITICAL 漏洞阻断发布，包含尚未修复项；没有通�
 
 ## 企业网络
 
-构建代理使用 Docker 标准 HTTP_PROXY/HTTPS_PROXY/NO_PROXY build args；私有凭据使用 BuildKit secret，不使用 ARG 持久化。证书通过企业基础镜像/派生层配置 update-ca-certificates。离线部署应先镜像上游 OCI 输入、Ubuntu apt、npm、PyPI 及 Trivy DB，不能把网络失败当成测试通过。
+构建代理使用 Docker 标准 HTTP_PROXY/HTTPS_PROXY/NO_PROXY build args；私有凭据使用 BuildKit secret，不使用 ARG 持久化。系统/Python 证书通过派生层配置 update-ca-certificates；Node 配置 NODE_EXTRA_CA_CERTS，Java 通过 keytool 导入专用 truststore，并设置 javax.net.ssl.trustStore。离线部署应先镜像上游 OCI 输入、Ubuntu apt、npm、PyPI 及 Trivy DB，不能把网络失败当成测试通过。
 
 base 不支持直接编译本地 C 扩展；选择 build。pip 安装到 venv。Node 原生模块可指定 npm_config_nodedir=/usr/local 使用保留的 headers，避免离线环境下载 headers。

@@ -22,3 +22,9 @@ flowchart TD
 build 继承同一 base 阶段，保持共享层；cache scope 按架构和变体隔离。无 SSH、守护进程、密码、内置访问令牌。企业 CA 应在派生镜像中安装，不关闭 TLS 验证。
 
 发布仅在 main 的 workflow_dispatch 且版本格式有效时运行。建议管理员给 main 配置必需检查和 PR 审核、给 release environment 配置人工审批；这些仓库管理策略不由源码自动启用。
+
+## npm 安全维护
+
+首轮 Trivy 检出官方 Node 载荷中 npm 的 brace-expansion、http-cache-semantics、undici 漏洞。载荷阶段升级官方 npm 11.21.1，并以无运行时依赖、兼容 Node 18.17+ 的 undici 6.29.1 替换 npm 内嵌的同一 6.x 依赖。两项版本均固定为 build ARG；这是显式供应链补丁，后续 npm 官方包含该修复时应移除此补丁。SBOM 和扫描以最终安装内容为准，不设置漏洞忽略项。
+
+上游依据：[npm 11.21.1](https://github.com/npm/cli/releases/tag/v11.21.1)、[undici 6.29.1](https://github.com/nodejs/undici/releases/tag/v6.29.1)。
