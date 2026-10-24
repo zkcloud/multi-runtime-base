@@ -17,7 +17,8 @@ def run(*args):
 def size(root):
     return sum(p.stat().st_size for p in root.rglob("*") if p.is_file() and not p.is_symlink())
 def modules(binary):
-    return sorted(run(binary, "--list-modules").splitlines())
+    lines = run(binary, "--list-modules").splitlines()
+    return sorted(line for line in lines if "@" in line and not line.startswith("["))
 
 before = {"java": size(java), "node": size(node)}
 expected = modules(java / "bin/java")
@@ -28,6 +29,10 @@ subprocess.run([str(java / "bin/jlink"), "--module-path", str(java / "jmods"),
                 "--output", str(linked)], check=True)
 assert modules(linked / "bin/java") == expected, "jlink lost a JDK module"
 # Only the runtime resource image changes; vendor native libraries, tools and headers stay.
+cds_bytes = 0
+for path in (java / "lib").rglob("*.jsa"):
+    cds_bytes += path.stat().st_size
+    path.unlink()
 shutil.copyfile(linked / "lib/modules", java / "lib/modules")
 subprocess.run([str(java / "bin/jimage"), "verify", str(java / "lib/modules")], check=True)
 assert modules(java / "bin/java") == expected
@@ -59,10 +64,6 @@ for path in sorted((java / "jmods").glob("*.jmod")):
 
 # Pre-generated CDS archives depend on the original module image.
 # CDS remains available: users can regenerate an archive with java -Xshare:dump.
-cds_bytes = 0
-for path in (java / "lib").rglob("*.jsa"):
-    cds_bytes += path.stat().st_size
-    path.unlink()
 # Node's dynamic exports remain; optional native symbol table/debugging tradeoff.
 node_binary = node / "bin/node"
 if strip_node:
