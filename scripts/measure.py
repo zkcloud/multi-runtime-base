@@ -7,6 +7,12 @@ import datetime
 variant, arch = sys.argv[1:3]
 def inspect(tag):
     return json.loads(subprocess.check_output(["docker", "image", "inspect", tag]))[0]
+def packages(tag):
+    return sorted(subprocess.check_output(
+        ["docker", "run", "--rm", tag, "dpkg-query", "-W"], text=True
+    ).splitlines())
+if packages("local/" + variant + ":baseline") != packages("local/" + variant + ":test"):
+    raise SystemExit("Baseline/optimized package versions differ; comparison rejected")
 before = inspect("local/" + variant + ":baseline")
 after = inspect("local/" + variant + ":test")
 report = {
@@ -14,6 +20,7 @@ report = {
     "measured_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
     "commit": __import__("os").environ.get("GITHUB_SHA", "local"),
     "metric": "docker image inspect .Size (uncompressed image content bytes)",
+    "package_versions_equal": True,
     "baseline_bytes": before["Size"], "optimized_bytes": after["Size"],
     "saved_bytes": before["Size"] - after["Size"],
     "saved_percent": round((before["Size"]-after["Size"])*100/before["Size"], 3),
