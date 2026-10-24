@@ -4,13 +4,15 @@ ARG JAVA_IMAGE=eclipse-temurin:21-jdk-noble
 ARG UBUNTU_IMAGE=ubuntu:24.04
 FROM ${NODE_IMAGE} AS node
 FROM ${JAVA_IMAGE} AS java
-FROM ubuntu:24.04 AS payload
+FROM ${UBUNTU_IMAGE} AS payload
 ARG TRIM=1
 COPY --from=node /usr/local/ /payload/node/
 COPY --from=java /opt/java/openjdk/ /payload/java/
 # Keep every JDK binary, module, header, library and legal notice.
-RUN if [ "$TRIM" = 1 ]; then \
+RUN rm -f /payload/node/bin/yarn /payload/node/bin/yarnpkg /payload/node/bin/docker-entrypoint.sh; \
+    if [ "$TRIM" = 1 ]; then \
       rm -rf /payload/node/share/doc /payload/node/share/man \
+             /payload/node/lib/node_modules/npm/docs /payload/node/lib/node_modules/npm/man \
              /payload/java/lib/src.zip; \
     fi
 

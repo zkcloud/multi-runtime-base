@@ -62,5 +62,7 @@ if [[ "$variant" = build ]]; then
   # Exercise Python C extension compilation through the actual headers.
   gcc -shared -fPIC $(python3-config --includes) /tests/native.c -o /tmp/native_smoke.so
   PYTHONPATH=/tmp python -c 'import native_smoke; assert native_smoke.answer() == 42'
+  gcc -shared -fPIC -I/usr/local/include/node /tests/node_native.c -o /tmp/node_native.node
+  node -e 'require("node:assert").equal(require("/tmp/node_native.node").answer(),42)'
 fi
 echo "PASS functional $variant $(uname -m)"

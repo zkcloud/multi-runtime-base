@@ -2,7 +2,7 @@ name: Images
 on:
   pull_request:
   push:
-    branches: [main, "feat/**"]
+    branches: [main]
   workflow_dispatch:
     inputs:
       release_version:
@@ -33,6 +33,18 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
       - run: mkdir -p reports
+      - name: Resolve immutable upstream inputs
+        id: upstream
+        run: |
+          set -euo pipefail
+          for pair in "ubuntu=ubuntu:24.04" "node=node:24-bookworm-slim" "java=eclipse-temurin:21-jdk-noble"; do
+            key="${pair%%=*}"
+            ref="${pair#*=}"
+            docker buildx imagetools inspect "$ref" > "reports/upstream-$key.txt"
+            digest="$(awk '$1 == "Digest:" {print $2; exit}' "reports/upstream-$key.txt")"
+            [[ "$digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+            printf '%s=%s@%s\n' "$key" "$ref" "$digest" >> "$GITHUB_OUTPUT"
+          done
       - name: Build optimized image
         id: optimized
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
@@ -42,7 +54,11 @@ jobs:
           platforms: linux/${{ matrix.arch }}
           load: true
           tags: local/${{ matrix.variant }}:test
-          build-args: TRIM=1
+          build-args: |
+            TRIM=1
+            UBUNTU_IMAGE=${{ steps.upstream.outputs.ubuntu }}
+            NODE_IMAGE=${{ steps.upstream.outputs.node }}
+            JAVA_IMAGE=${{ steps.upstream.outputs.java }}
           cache-from: type=gha,scope=${{ matrix.arch }}-${{ matrix.variant }}
           cache-to: type=gha,mode=max,scope=${{ matrix.arch }}-${{ matrix.variant }}
           provenance: false
@@ -58,7 +74,11 @@ jobs:
           platforms: linux/${{ matrix.arch }}
           load: true
           tags: local/${{ matrix.variant }}:baseline
-          build-args: TRIM=0
+          build-args: |
+            TRIM=0
+            UBUNTU_IMAGE=${{ steps.upstream.outputs.ubuntu }}
+            NODE_IMAGE=${{ steps.upstream.outputs.node }}
+            JAVA_IMAGE=${{ steps.upstream.outputs.java }}
           cache-from: type=gha,scope=${{ matrix.arch }}-${{ matrix.variant }}
           provenance: false
       - name: Measure image sizes and layers
@@ -67,6 +87,7 @@ jobs:
           ARCH: ${{ matrix.arch }}
         run: |
           set -euo pipefail
+          test "$(docker run --rm "local/$VARIANT:test" dpkg --print-architecture)" = "$ARCH"
           python3 scripts/measure.py "$VARIANT" "$ARCH" | tee reports/sizes.json
           docker history --no-trunc "local/$VARIANT:test" > reports/history.txt
           docker image inspect "local/$VARIANT:test" > reports/inspect.json
