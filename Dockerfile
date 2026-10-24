@@ -13,26 +13,35 @@ RUN npm install --global "npm@${NPM_VERSION}" --ignore-scripts --no-audit --no-f
     && cp -a /tmp/npm-security/node_modules/undici /usr/local/lib/node_modules/npm/node_modules/undici \
     && rm -rf /tmp/npm-security /root/.npm
 FROM ${JAVA_IMAGE} AS java
-FROM ${UBUNTU_IMAGE} AS payload
+FROM ${JAVA_IMAGE} AS payload
 ARG TRIM=1
+ARG OPTIMIZE=1
+ARG STRIP_NODE=1
+RUN apt-get update && apt-get install -y --no-install-recommends python3 binutils \
+    && rm -rf /var/lib/apt/lists/*
+COPY scripts/optimize_payload.py /tmp/optimize_payload.py
 COPY --from=node /usr/local/ /payload/node/
 COPY --from=java /opt/java/openjdk/ /payload/java/
 # Keep every JDK binary, module, header, library and legal notice.
-RUN rm -f /payload/node/bin/yarn /payload/node/bin/yarnpkg /payload/node/bin/docker-entrypoint.sh; \
+RUN mkdir -p /payload/optimization; \
+    rm -f /payload/node/bin/yarn /payload/node/bin/yarnpkg /payload/node/bin/docker-entrypoint.sh; \
     if [ "$TRIM" = 1 ]; then \
       rm -rf /payload/node/share/doc /payload/node/share/man \
              /payload/node/lib/node_modules/npm/docs /payload/node/lib/node_modules/npm/man \
              /payload/java/lib/src.zip; \
-    fi
+    fi; \
+    if [ "$OPTIMIZE" = 1 ]; then python3 /tmp/optimize_payload.py /payload/java /payload/node "$STRIP_NODE"; fi
 
 FROM ${UBUNTU_IMAGE} AS base
 ARG TRIM=1
+ARG OPTIMIZE=1
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH=/opt/java/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=C.UTF-8
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 # Do not remove dpkg metadata, apt, CA certificates or shared libraries.
-RUN if [ "$TRIM" = 1 ]; then \
+RUN --mount=type=bind,source=scripts/prune_python.py,target=/tmp/prune_python.py \
+    if [ "$TRIM" = 1 ]; then \
       printf 'path-exclude=/usr/share/doc/*\npath-include=/usr/share/doc/*/copyright\npath-exclude=/usr/share/man/*\npath-exclude=/usr/share/info/*\n' > /etc/dpkg/dpkg.cfg.d/01-nodoc; \
     fi; \
     apt-get update; \
@@ -41,10 +50,12 @@ RUN if [ "$TRIM" = 1 ]; then \
       libstdc++6 libgcc-s1 zlib1g libfontconfig1 libfreetype6 \
       libasound2t64 libx11-6 libxext6 libxi6 libxrender1 libxtst6; \
     if [ "$TRIM" = 1 ]; then rm -rf /var/lib/apt/lists/* /var/cache/apt/*; fi; \
+    if [ "$OPTIMIZE" = 1 ]; then python3 /tmp/prune_python.py; fi; \
     ln -s /usr/bin/python3.12 /usr/local/bin/python; \
     ln -s /usr/bin/python3.12 /usr/local/bin/python3
 COPY --from=payload /payload/node/ /usr/local/
 COPY --from=payload /payload/java/ /opt/java/openjdk/
+COPY --from=payload /payload/optimization/ /usr/local/share/multi-runtime-optimization/
 LABEL org.opencontainers.image.source="https://github.com/zkcloud/multi-runtime-base" \
       org.opencontainers.image.title="multi-runtime-base" \
       org.opencontainers.image.description="Ubuntu 24.04, Python 3.12, Node 24 and Eclipse Temurin JDK 21"
@@ -52,9 +63,11 @@ WORKDIR /workspace
 CMD ["/bin/bash"]
 
 FROM base AS build
-RUN apt-get update; \
+RUN --mount=type=bind,source=scripts/prune_python.py,target=/tmp/prune_python.py \
+    apt-get update; \
     apt-get install -y --no-install-recommends \
       build-essential pkg-config python3.12-dev git cmake ninja-build; \
     if [ "$TRIM" = 1 ]; then rm -rf /var/lib/apt/lists/* /var/cache/apt/*; fi; \
     printf '#!/bin/sh\nexec /usr/bin/python3.12-config "$@"\n' > /usr/local/bin/python3-config; \
-    chmod 0755 /usr/local/bin/python3-config
+    chmod 0755 /usr/local/bin/python3-config; \
+    if [ "$OPTIMIZE" = 1 ]; then python3 /tmp/prune_python.py; fi

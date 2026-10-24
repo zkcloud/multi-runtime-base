@@ -1,2 +1,6 @@
 **
 !Dockerfile
+!Dockerfile.reference
+!scripts/
+!scripts/optimize_payload.py
+!scripts/prune_python.py
