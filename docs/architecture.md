@@ -30,3 +30,5 @@ build 继承同一 base 阶段，保持共享层；cache scope 按架构和变�
 上游依据：[npm 11.21.1](https://github.com/npm/cli/releases/tag/v11.21.1)、[undici 6.29.1](https://github.com/nodejs/undici/releases/tag/v6.29.1)。
 
 Python 的配置脚本按调用路径计算 prefix，因此 python3-config 使用 exec 包装器调用 /usr/bin/python3.12-config，不能直接从 /usr/local/bin 链接（实测会错误返回 /usr/local/include/python3.12）。build 测试实际编译和导入 C 扩展验证头文件位置。
+
+Trivy 工具版本显式固定为 v0.76.1。build 镜像的 linux-libc-dev 由 libc6-dev/build-essential 引入；扫描可能按 Linux 源包映射内核 CVE。保留完整原始发现和阻断门禁，不能未经逐项安全审核就把所有头文件告警判为误报或设置批量忽略。容器实际宿主机内核必须另行检查。

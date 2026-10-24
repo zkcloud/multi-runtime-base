@@ -107,6 +107,7 @@ jobs:
       - name: Trivy vulnerability report
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:
+          version: v0.76.1
           image-ref: local/${{ matrix.variant }}:test
           format: json
           output: reports/trivy.json
@@ -116,6 +117,7 @@ jobs:
       - name: SPDX SBOM
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:
+          version: v0.76.1
           image-ref: local/${{ matrix.variant }}:test
           format: spdx-json
           output: reports/sbom.spdx.json
