@@ -1,0 +1,1082 @@
+{
+  "measured_source_head": "3d6cd4081a40b4622f59ae5a5877715609cfbd6c",
+  "tested_merge_commit": "923494b6a081de2bc36ffc069ef4273e9a330adb",
+  "baseline_source": "07d82c08a3c740311897bb47d35e01c763a79e1a",
+  "workflow_url": "https://github.com/zkcloud/multi-runtime-base/actions/runs/40093061879",
+  "formal_release_executed": false,
+  "results": [
+    {
+      "artifact_id": 12559492853,
+      "name": "reports-base-amd64",
+      "sizes": {
+        "variant": "base",
+        "architecture": "amd64",
+        "measured_at": "2026-10-24T12:17:34.957620+00:00",
+        "commit": "923494b6a081de2bc36ffc069ef4273e9a330adb",
+        "reference_source": "07d82c08a3c740311897bb47d35e01c763a79e1a",
+        "reference": "Dockerfile.reference, previous main TRIM=1",
+        "metric": "docker image inspect .Size, uncompressed bytes",
+        "package_versions_equal": true,
+        "profiles": {
+          "baseline": {
+            "bytes": 603811358,
+            "image_id": "sha256:ca6620648fca76dcc74282b29dfa8eb9037e3e706c2c02844fec62c9afd28721",
+            "saved_bytes": 0,
+            "saved_percent": 0
+          },
+          "compact": {
+            "bytes": 472564115,
+            "image_id": "sha256:377a8b74b2dc686222435064a0c3e7db318e117a37cbff9f694f1604dfa024eb",
+            "saved_bytes": 131247243,
+            "saved_percent": 21.736
+          },
+          "test": {
+            "bytes": 454388978,
+            "image_id": "sha256:422d978c1bc02c583ecf8f31c9153dcd8e13503353c02fa42d3f254cac794c87",
+            "saved_bytes": 149422380,
+            "saved_percent": 24.747
+          }
+        },
+        "selected": "test",
+        "compressed_registry_bytes": null
+      },
+      "compression": {
+        "metric": "actual local OCI compressed layer sizes; not registry download",
+        "results": [
+          {
+            "profile": "baseline-gzip6",
+            "compressed_layer_bytes": 265656647,
+            "layers": [
+              {
+                "digest": "sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b",
+                "size": 29765758,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:5bfae1895a50011902020258ad2051b2aacae333b86eb631b55ed6eb27a4fab1",
+                "size": 27358070,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:7e00d6508a0d96613e5453baa7cb1689804a4d3caacdc53e9a507b526829eb16",
+                "size": 50415219,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:c666f55010e4050d669ae081b9dc2a501fd2f5f1898530c1cf0c6ee4b5dbe549",
+                "size": 158117501,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:72daec0e057687eb5c327d2315a10b1d7f05725e85607a7da9482dde06643e53",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-gzip9",
+            "compressed_layer_bytes": 256513009,
+            "layers": [
+              {
+                "digest": "sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b",
+                "size": 29765758,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:2fdc45eccf933563af270c7de3f30ff7ef7bcdf1d1a1619bffdd76ee24062f8b",
+                "size": 19084104,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:4170b7074f24ec59bd03849b1f30a6daeac400be413cd6f2a8c776c2e1dc3cfc",
+                "size": 46098243,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:ea8b0855b0c4957f6de5d4b6844d15c0580adee6ea39368fb54c82da80e1cca8",
+                "size": 161563924,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:cbafe36606ea49c4d41173d77dd2328f77632212e9607729fc680896eac45253",
+                "size": 881,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:b110f17000912839a6cd28f89a8284f63b015cd5c6594e847609b32ec33443b7",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-zstd19",
+            "compressed_layer_bytes": 234048344,
+            "layers": [
+              {
+                "digest": "sha256:e210a6b40e5a8dcdd95343dd96f8c9c4b55951f75aae6c31c8de9506c5c242e9",
+                "size": 24397191,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:cc45bdb8ee32603148562ca0f37ac958d082f587744cf19a569f24b9dbe9ac95",
+                "size": 16282824,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:8960515989774edde8d4900a4f73db5891b22f1d80f0cfe95d177bcaf49d651b",
+                "size": 37577033,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:56b098bf45394af1813d9989616e62f65028fddda40da080838387adb0656adc",
+                "size": 155790382,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:c3b768212bfaf51b2c6a1ebe5e605cb7fd993b3d508678358cbbd4601cff56c9",
+                "size": 828,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:65e894c6d1ac31f1cbe5723bdd030368a10faae1ba8a86b2008fde9945dd9ef7",
+                "size": 86,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              }
+            ]
+          }
+        ]
+      },
+      "payload": {
+        "before_bytes": {
+          "java": 307556223,
+          "node": 144714346
+        },
+        "after_bytes": {
+          "java": 197369028,
+          "node": 126539210
+        },
+        "node_native_symbols_stripped": true,
+        "jdk_modules": [
+          "java.base@21.0.12.1",
+          "java.compiler@21.0.12.1",
+          "java.datatransfer@21.0.12.1",
+          "java.desktop@21.0.12.1",
+          "java.instrument@21.0.12.1",
+          "java.logging@21.0.12.1",
+          "java.management.rmi@21.0.12.1",
+          "java.management@21.0.12.1",
+          "java.naming@21.0.12.1",
+          "java.net.http@21.0.12.1",
+          "java.prefs@21.0.12.1",
+          "java.rmi@21.0.12.1",
+          "java.scripting@21.0.12.1",
+          "java.se@21.0.12.1",
+          "java.security.jgss@21.0.12.1",
+          "java.security.sasl@21.0.12.1",
+          "java.smartcardio@21.0.12.1",
+          "java.sql.rowset@21.0.12.1",
+          "java.sql@21.0.12.1",
+          "java.transaction.xa@21.0.12.1",
+          "java.xml.crypto@21.0.12.1",
+          "java.xml@21.0.12.1",
+          "jdk.accessibility@21.0.12.1",
+          "jdk.attach@21.0.12.1",
+          "jdk.charsets@21.0.12.1",
+          "jdk.compiler@21.0.12.1",
+          "jdk.crypto.cryptoki@21.0.12.1",
+          "jdk.crypto.ec@21.0.12.1",
+          "jdk.dynalink@21.0.12.1",
+          "jdk.editpad@21.0.12.1",
+          "jdk.hotspot.agent@21.0.12.1",
+          "jdk.httpserver@21.0.12.1",
+          "jdk.incubator.vector@21.0.12.1",
+          "jdk.internal.ed@21.0.12.1",
+          "jdk.internal.jvmstat@21.0.12.1",
+          "jdk.internal.le@21.0.12.1",
+          "jdk.internal.opt@21.0.12.1",
+          "jdk.internal.vm.ci@21.0.12.1",
+          "jdk.internal.vm.compiler.management@21.0.12.1",
+          "jdk.internal.vm.compiler@21.0.12.1",
+          "jdk.jartool@21.0.12.1",
+          "jdk.javadoc@21.0.12.1",
+          "jdk.jcmd@21.0.12.1",
+          "jdk.jconsole@21.0.12.1",
+          "jdk.jdeps@21.0.12.1",
+          "jdk.jdi@21.0.12.1",
+          "jdk.jdwp.agent@21.0.12.1",
+          "jdk.jfr@21.0.12.1",
+          "jdk.jlink@21.0.12.1",
+          "jdk.jpackage@21.0.12.1",
+          "jdk.jshell@21.0.12.1",
+          "jdk.jsobject@21.0.12.1",
+          "jdk.jstatd@21.0.12.1",
+          "jdk.localedata@21.0.12.1",
+          "jdk.management.agent@21.0.12.1",
+          "jdk.management.jfr@21.0.12.1",
+          "jdk.management@21.0.12.1",
+          "jdk.naming.dns@21.0.12.1",
+          "jdk.naming.rmi@21.0.12.1",
+          "jdk.net@21.0.12.1",
+          "jdk.nio.mapmode@21.0.12.1",
+          "jdk.random@21.0.12.1",
+          "jdk.sctp@21.0.12.1",
+          "jdk.security.auth@21.0.12.1",
+          "jdk.security.jgss@21.0.12.1",
+          "jdk.unsupported.desktop@21.0.12.1",
+          "jdk.unsupported@21.0.12.1",
+          "jdk.xml.dom@21.0.12.1",
+          "jdk.zipfs@21.0.12.1"
+        ],
+        "jdk_module_count": 69,
+        "jmod_entries_sha256_verified": 28819,
+        "jmods_before_bytes": 86688672,
+        "jmods_after_bytes": 86044264,
+        "regenerable_cds_removed_bytes": 29569024
+      },
+      "checks": {
+        "baseline": {
+          "functional": "passed",
+          "jdk_node_extended": "passed"
+        },
+        "compact": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 1703
+        },
+        "test": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 1703
+        }
+      },
+      "module_sets_equal": true,
+      "sbom_packages": 282,
+      "severity_counts": {
+        "MEDIUM": 33,
+        "LOW": 6
+      },
+      "high_critical": 0,
+      "high_critical_packages": {}
+    },
+    {
+      "artifact_id": 12560450007,
+      "name": "reports-base-arm64",
+      "sizes": {
+        "variant": "base",
+        "architecture": "arm64",
+        "measured_at": "2026-10-24T12:17:29.341384+00:00",
+        "commit": "923494b6a081de2bc36ffc069ef4273e9a330adb",
+        "reference_source": "07d82c08a3c740311897bb47d35e01c763a79e1a",
+        "reference": "Dockerfile.reference, previous main TRIM=1",
+        "metric": "docker image inspect .Size, uncompressed bytes",
+        "package_versions_equal": true,
+        "profiles": {
+          "baseline": {
+            "bytes": 625678651,
+            "image_id": "sha256:b9aca7e5e7963d0a09d1f04c4b696ebe0d0f2a6cf4955e967e2b0d941d4aec08",
+            "saved_bytes": 0,
+            "saved_percent": 0
+          },
+          "compact": {
+            "bytes": 493984484,
+            "image_id": "sha256:0cdd7c682f08973cc6271a9219aeb2dacf151c3fe0a63a176888c385d1b60a7b",
+            "saved_bytes": 131694167,
+            "saved_percent": 21.048
+          },
+          "test": {
+            "bytes": 473950803,
+            "image_id": "sha256:3e1db2e071665bc895ea5a3f5f92cd592d2a55149b72afb2ff6113697e3b23e5",
+            "saved_bytes": 151727848,
+            "saved_percent": 24.25
+          }
+        },
+        "selected": "test",
+        "compressed_registry_bytes": null
+      },
+      "compression": {
+        "metric": "actual local OCI compressed layer sizes; not registry download",
+        "results": [
+          {
+            "profile": "baseline-gzip6",
+            "compressed_layer_bytes": 262964062,
+            "layers": [
+              {
+                "digest": "sha256:d5aec63251bb323f816a0f4b8a554bd84e478466a9ed1068daef07368328e9a3",
+                "size": 28939761,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:437d4dac8f8d78f6c1176d2bef34e5a3044778918bd6cb51cb298a9228cb8740",
+                "size": 27224604,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:21012663043d228de1e093a9ee9b94e412b6cb8d4125ae982c20e9b97fa84381",
+                "size": 50398899,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:7e4157b632dbb3ef96f1bd2b63eb3520c405904358a3d98adf5ab046556f0d35",
+                "size": 156400699,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:dfb4460cabf42d76412e1ada12e0b0db70e8b8c9d02f058152e3c78e4ce13180",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-gzip9",
+            "compressed_layer_bytes": 253681474,
+            "layers": [
+              {
+                "digest": "sha256:d5aec63251bb323f816a0f4b8a554bd84e478466a9ed1068daef07368328e9a3",
+                "size": 28939761,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:18e31c064ab8ea508fcb43b076d1480aeb1801f1d34f73f48e07a43e702ead77",
+                "size": 18952174,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:b27011b70a5c19e2c6dcd4ee14b3686cf9c496ff5f8f8104eaa5ed4e201bb1ae",
+                "size": 45912335,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:180e646afc67e1897f2e8fc277b9c398aecfc05731a4cd409ea6a508674685e0",
+                "size": 159876223,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:a4e0663509028e1120d04c719fd71033d818e33e1556076653f89a4aa15f4e9c",
+                "size": 882,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:691f0188b953777d29da4ca4ad49b4b379e54ba8d01239c13e9b03f369a58d32",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-zstd19",
+            "compressed_layer_bytes": 230765420,
+            "layers": [
+              {
+                "digest": "sha256:1ea8b1f5665316f861c45290259aa97082a8498afd3c003604986ec35526c9d7",
+                "size": 23253819,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:29cfe17750af0692a29fa28336ba19e3bf286a4e93eb04f95563430ecd55a339",
+                "size": 16068082,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:f3667ef7072ab9c07cfb1f5e1b2f78af7b1b4837808b4e78e10cc2bda46cc21e",
+                "size": 37447237,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:0ec84f9d73b6761d06f78fa6f94772e624015c3e594b66e58324e6aecda71a91",
+                "size": 153995367,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:c1ec8897a0bd321ca393fbe302e165d2313c59bf1711f6b9c9a9b5c6f818872d",
+                "size": 829,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:8a2b10357449db9f2fba0377eb3eca23e52909239fc39cdc3d3e0c4d7011c10e",
+                "size": 86,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              }
+            ]
+          }
+        ]
+      },
+      "payload": {
+        "before_bytes": {
+          "java": 308151757,
+          "node": 141211621
+        },
+        "after_bytes": {
+          "java": 197517996,
+          "node": 121177941
+        },
+        "node_native_symbols_stripped": true,
+        "jdk_modules": [
+          "java.base@21.0.12.1",
+          "java.compiler@21.0.12.1",
+          "java.datatransfer@21.0.12.1",
+          "java.desktop@21.0.12.1",
+          "java.instrument@21.0.12.1",
+          "java.logging@21.0.12.1",
+          "java.management.rmi@21.0.12.1",
+          "java.management@21.0.12.1",
+          "java.naming@21.0.12.1",
+          "java.net.http@21.0.12.1",
+          "java.prefs@21.0.12.1",
+          "java.rmi@21.0.12.1",
+          "java.scripting@21.0.12.1",
+          "java.se@21.0.12.1",
+          "java.security.jgss@21.0.12.1",
+          "java.security.sasl@21.0.12.1",
+          "java.smartcardio@21.0.12.1",
+          "java.sql.rowset@21.0.12.1",
+          "java.sql@21.0.12.1",
+          "java.transaction.xa@21.0.12.1",
+          "java.xml.crypto@21.0.12.1",
+          "java.xml@21.0.12.1",
+          "jdk.accessibility@21.0.12.1",
+          "jdk.attach@21.0.12.1",
+          "jdk.charsets@21.0.12.1",
+          "jdk.compiler@21.0.12.1",
+          "jdk.crypto.cryptoki@21.0.12.1",
+          "jdk.crypto.ec@21.0.12.1",
+          "jdk.dynalink@21.0.12.1",
+          "jdk.editpad@21.0.12.1",
+          "jdk.hotspot.agent@21.0.12.1",
+          "jdk.httpserver@21.0.12.1",
+          "jdk.incubator.vector@21.0.12.1",
+          "jdk.internal.ed@21.0.12.1",
+          "jdk.internal.jvmstat@21.0.12.1",
+          "jdk.internal.le@21.0.12.1",
+          "jdk.internal.opt@21.0.12.1",
+          "jdk.internal.vm.ci@21.0.12.1",
+          "jdk.internal.vm.compiler.management@21.0.12.1",
+          "jdk.internal.vm.compiler@21.0.12.1",
+          "jdk.jartool@21.0.12.1",
+          "jdk.javadoc@21.0.12.1",
+          "jdk.jcmd@21.0.12.1",
+          "jdk.jconsole@21.0.12.1",
+          "jdk.jdeps@21.0.12.1",
+          "jdk.jdi@21.0.12.1",
+          "jdk.jdwp.agent@21.0.12.1",
+          "jdk.jfr@21.0.12.1",
+          "jdk.jlink@21.0.12.1",
+          "jdk.jpackage@21.0.12.1",
+          "jdk.jshell@21.0.12.1",
+          "jdk.jsobject@21.0.12.1",
+          "jdk.jstatd@21.0.12.1",
+          "jdk.localedata@21.0.12.1",
+          "jdk.management.agent@21.0.12.1",
+          "jdk.management.jfr@21.0.12.1",
+          "jdk.management@21.0.12.1",
+          "jdk.naming.dns@21.0.12.1",
+          "jdk.naming.rmi@21.0.12.1",
+          "jdk.net@21.0.12.1",
+          "jdk.nio.mapmode@21.0.12.1",
+          "jdk.random@21.0.12.1",
+          "jdk.sctp@21.0.12.1",
+          "jdk.security.auth@21.0.12.1",
+          "jdk.security.jgss@21.0.12.1",
+          "jdk.unsupported.desktop@21.0.12.1",
+          "jdk.unsupported@21.0.12.1",
+          "jdk.xml.dom@21.0.12.1",
+          "jdk.zipfs@21.0.12.1"
+        ],
+        "jdk_module_count": 69,
+        "jmod_entries_sha256_verified": 28818,
+        "jmods_before_bytes": 85739323,
+        "jmods_after_bytes": 85118002,
+        "regenerable_cds_removed_bytes": 29884416
+      },
+      "checks": {
+        "baseline": {
+          "functional": "passed",
+          "jdk_node_extended": "passed"
+        },
+        "compact": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 1700
+        },
+        "test": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 1700
+        }
+      },
+      "module_sets_equal": true,
+      "sbom_packages": 282,
+      "severity_counts": {
+        "MEDIUM": 33,
+        "LOW": 6
+      },
+      "high_critical": 0,
+      "high_critical_packages": {},
+      "upstream": {
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac",
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964"
+      }
+    },
+    {
+      "artifact_id": 12559857858,
+      "name": "reports-build-amd64",
+      "sizes": {
+        "variant": "build",
+        "architecture": "amd64",
+        "measured_at": "2026-10-24T12:18:40.444437+00:00",
+        "commit": "923494b6a081de2bc36ffc069ef4273e9a330adb",
+        "reference_source": "07d82c08a3c740311897bb47d35e01c763a79e1a",
+        "reference": "Dockerfile.reference, previous main TRIM=1",
+        "metric": "docker image inspect .Size, uncompressed bytes",
+        "package_versions_equal": true,
+        "profiles": {
+          "baseline": {
+            "bytes": 1046435153,
+            "image_id": "sha256:d061c8a3df329528e20bb3a06b8fae4b9ae889003220b31049ea9ef910cb3fd9",
+            "saved_bytes": 0,
+            "saved_percent": 0
+          },
+          "compact": {
+            "bytes": 915187910,
+            "image_id": "sha256:493acbdfc119bdd216243ea4b9824bf8ac41d98256759eb82b2f755a69c94f81",
+            "saved_bytes": 131247243,
+            "saved_percent": 12.542
+          },
+          "test": {
+            "bytes": 897012773,
+            "image_id": "sha256:5fb2ec46d081ecbc9188704b5c40f9ddcc99a84bf0a60cb209b0b1b1d58829e3",
+            "saved_bytes": 149422380,
+            "saved_percent": 14.279
+          }
+        },
+        "selected": "test",
+        "compressed_registry_bytes": null
+      },
+      "compression": {
+        "metric": "actual local OCI compressed layer sizes; not registry download",
+        "results": [
+          {
+            "profile": "baseline-gzip6",
+            "compressed_layer_bytes": 424616154,
+            "layers": [
+              {
+                "digest": "sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b",
+                "size": 29765758,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:07b1852090daa6965251afedfacac302cd85919bcd8ed87b42a0a37a428140f9",
+                "size": 27358293,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:8c20dac048f2dbe38872f45c3fbdbf3777faa22fd91942d230449e08fc4bcf7e",
+                "size": 50414426,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:2d618ccde5cb3787fc55736df24b6c28e2940bed66fa1da90812d972d8aeb1db",
+                "size": 158117527,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:ab75782222a8a8c018741a9e3bc947476c031a82eba82f0f2e0cf70b453a6873",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:70ac6a7cd7384146293de42706fc158d4f56bd88c589685b1777fb22a6d25c05",
+                "size": 158960051,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-gzip9",
+            "compressed_layer_bytes": 415473248,
+            "layers": [
+              {
+                "digest": "sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b",
+                "size": 29765758,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:76aac1b91a26741a6fd3f16751a32bad1e0fb30828aa8754dc73dae9956274d8",
+                "size": 19084179,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:6f617a484af9133230ee3261f6e88509aa5cf563533e6b546e220e164d9325b7",
+                "size": 46097797,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:ff681bff0e730bedf421c3da23986532873c0087aac9cff22dd820a44c9a69c9",
+                "size": 161563923,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:9834f4d047f163665a7598787be72c60aedc57749a85a7c89f6f264cb0cb028c",
+                "size": 880,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:5ed0dc369b838ec168ca23ed25be18b6b62e2aa0f0076dae455c001a6c2fd24c",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:94db9235519bc2c098f0043d2e8039316a4bf557775aba7448e50a51d3d0e26c",
+                "size": 158960612,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-zstd19",
+            "compressed_layer_bytes": 365650152,
+            "layers": [
+              {
+                "digest": "sha256:e210a6b40e5a8dcdd95343dd96f8c9c4b55951f75aae6c31c8de9506c5c242e9",
+                "size": 24397191,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:e22b26fe88942dda57806abb9712b6b065283e37b3a46f3acf48104bc4f43dd4",
+                "size": 16282760,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:c29b90e733f61b7d21e821b100a84c01973f142f4f7531fbb4de08e262e42215",
+                "size": 37576330,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:ac0c86fdad87e40f120986d18b4dbd425a2dd747b2c68093994bb75de0a9cccf",
+                "size": 155790231,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:fafa0b5c79e4e3bd5d5ff4d5b1be2dc82a1b29981b62bf8e92b4726da22e326e",
+                "size": 826,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:c8f2fd4ea9bdaebed812df3a283f401f151e97a4f36d6b1f51916f3737da22da",
+                "size": 85,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:29e4b2dc4a668189fcfb781b50bff4f9ab75486345c2e0a89575dc6cd95329a8",
+                "size": 131602729,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              }
+            ]
+          }
+        ]
+      },
+      "payload": {
+        "before_bytes": {
+          "java": 307556223,
+          "node": 144714346
+        },
+        "after_bytes": {
+          "java": 197369028,
+          "node": 126539210
+        },
+        "node_native_symbols_stripped": true,
+        "jdk_modules": [
+          "java.base@21.0.12.1",
+          "java.compiler@21.0.12.1",
+          "java.datatransfer@21.0.12.1",
+          "java.desktop@21.0.12.1",
+          "java.instrument@21.0.12.1",
+          "java.logging@21.0.12.1",
+          "java.management.rmi@21.0.12.1",
+          "java.management@21.0.12.1",
+          "java.naming@21.0.12.1",
+          "java.net.http@21.0.12.1",
+          "java.prefs@21.0.12.1",
+          "java.rmi@21.0.12.1",
+          "java.scripting@21.0.12.1",
+          "java.se@21.0.12.1",
+          "java.security.jgss@21.0.12.1",
+          "java.security.sasl@21.0.12.1",
+          "java.smartcardio@21.0.12.1",
+          "java.sql.rowset@21.0.12.1",
+          "java.sql@21.0.12.1",
+          "java.transaction.xa@21.0.12.1",
+          "java.xml.crypto@21.0.12.1",
+          "java.xml@21.0.12.1",
+          "jdk.accessibility@21.0.12.1",
+          "jdk.attach@21.0.12.1",
+          "jdk.charsets@21.0.12.1",
+          "jdk.compiler@21.0.12.1",
+          "jdk.crypto.cryptoki@21.0.12.1",
+          "jdk.crypto.ec@21.0.12.1",
+          "jdk.dynalink@21.0.12.1",
+          "jdk.editpad@21.0.12.1",
+          "jdk.hotspot.agent@21.0.12.1",
+          "jdk.httpserver@21.0.12.1",
+          "jdk.incubator.vector@21.0.12.1",
+          "jdk.internal.ed@21.0.12.1",
+          "jdk.internal.jvmstat@21.0.12.1",
+          "jdk.internal.le@21.0.12.1",
+          "jdk.internal.opt@21.0.12.1",
+          "jdk.internal.vm.ci@21.0.12.1",
+          "jdk.internal.vm.compiler.management@21.0.12.1",
+          "jdk.internal.vm.compiler@21.0.12.1",
+          "jdk.jartool@21.0.12.1",
+          "jdk.javadoc@21.0.12.1",
+          "jdk.jcmd@21.0.12.1",
+          "jdk.jconsole@21.0.12.1",
+          "jdk.jdeps@21.0.12.1",
+          "jdk.jdi@21.0.12.1",
+          "jdk.jdwp.agent@21.0.12.1",
+          "jdk.jfr@21.0.12.1",
+          "jdk.jlink@21.0.12.1",
+          "jdk.jpackage@21.0.12.1",
+          "jdk.jshell@21.0.12.1",
+          "jdk.jsobject@21.0.12.1",
+          "jdk.jstatd@21.0.12.1",
+          "jdk.localedata@21.0.12.1",
+          "jdk.management.agent@21.0.12.1",
+          "jdk.management.jfr@21.0.12.1",
+          "jdk.management@21.0.12.1",
+          "jdk.naming.dns@21.0.12.1",
+          "jdk.naming.rmi@21.0.12.1",
+          "jdk.net@21.0.12.1",
+          "jdk.nio.mapmode@21.0.12.1",
+          "jdk.random@21.0.12.1",
+          "jdk.sctp@21.0.12.1",
+          "jdk.security.auth@21.0.12.1",
+          "jdk.security.jgss@21.0.12.1",
+          "jdk.unsupported.desktop@21.0.12.1",
+          "jdk.unsupported@21.0.12.1",
+          "jdk.xml.dom@21.0.12.1",
+          "jdk.zipfs@21.0.12.1"
+        ],
+        "jdk_module_count": 69,
+        "jmod_entries_sha256_verified": 28819,
+        "jmods_before_bytes": 86688672,
+        "jmods_after_bytes": 86044264,
+        "regenerable_cds_removed_bytes": 29569024
+      },
+      "checks": {
+        "baseline": {
+          "functional": "passed",
+          "jdk_node_extended": "passed"
+        },
+        "compact": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 2689
+        },
+        "test": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 2689
+        }
+      },
+      "module_sets_equal": true,
+      "sbom_packages": 372,
+      "severity_counts": {
+        "MEDIUM": 1969,
+        "LOW": 714,
+        "CRITICAL": 14,
+        "HIGH": 372
+      },
+      "high_critical": 386,
+      "high_critical_packages": {
+        "linux-libc-dev": 386
+      },
+      "upstream": {
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac",
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964"
+      }
+    },
+    {
+      "artifact_id": 12559184149,
+      "name": "reports-build-arm64",
+      "sizes": {
+        "variant": "build",
+        "architecture": "arm64",
+        "measured_at": "2026-10-24T12:19:13.263220+00:00",
+        "commit": "923494b6a081de2bc36ffc069ef4273e9a330adb",
+        "reference_source": "07d82c08a3c740311897bb47d35e01c763a79e1a",
+        "reference": "Dockerfile.reference, previous main TRIM=1",
+        "metric": "docker image inspect .Size, uncompressed bytes",
+        "package_versions_equal": true,
+        "profiles": {
+          "baseline": {
+            "bytes": 1051243440,
+            "image_id": "sha256:3a145314bef3fee2d4ff17245a60ddf9ca536eaaf9da2a2b5f36a3c7de5be628",
+            "saved_bytes": 0,
+            "saved_percent": 0
+          },
+          "compact": {
+            "bytes": 919549273,
+            "image_id": "sha256:de08589bfc15b192dd25b17e7f05f0a41837ed62b9e3f6b1e7979ea9c4889063",
+            "saved_bytes": 131694167,
+            "saved_percent": 12.527
+          },
+          "test": {
+            "bytes": 899515592,
+            "image_id": "sha256:57d915a23c15833d428eb298d3abaf4445f6af7877fee78f209896cfb1e6bc03",
+            "saved_bytes": 151727848,
+            "saved_percent": 14.433
+          }
+        },
+        "selected": "test",
+        "compressed_registry_bytes": null
+      },
+      "compression": {
+        "metric": "actual local OCI compressed layer sizes; not registry download",
+        "results": [
+          {
+            "profile": "baseline-gzip6",
+            "compressed_layer_bytes": 414855737,
+            "layers": [
+              {
+                "digest": "sha256:d5aec63251bb323f816a0f4b8a554bd84e478466a9ed1068daef07368328e9a3",
+                "size": 28939761,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:7f156e3f8eb96e26ac24959ecacbb936787f274f51e1b60639a0dc7ee5c98fc0",
+                "size": 27224708,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:cf9bee23af9197ba2b157ba2f9983ff3720857707ff752c9aa8af0c802a3c5a6",
+                "size": 50398295,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:0a0191604bdcab134593533d6943b0eb0c7356a837014b91eeb9a255fcd66c7c",
+                "size": 156400657,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:4677c09b87a1abb7eaefad4141307362039360d8705645102e76698f2f9c8770",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:42602487be5e0f55255e7140f8bc93ec07e8043a254f940ff38820d6a9a1d730",
+                "size": 151892217,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-gzip9",
+            "compressed_layer_bytes": 405573289,
+            "layers": [
+              {
+                "digest": "sha256:d5aec63251bb323f816a0f4b8a554bd84e478466a9ed1068daef07368328e9a3",
+                "size": 28939761,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:5b41f426a10c8e51a5890f3537288c482d807a681824a811c7cc0e60c982392c",
+                "size": 18952256,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:8c535c130669bda5751c8de7c92ce626d576c6dff07a660001455ed37425d7d1",
+                "size": 45911687,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:a244e02cac2614ca8d2c1b3003130fae689086f9b7e44f9388ac7a93888da89a",
+                "size": 159876273,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:f0fb4d9d10dab04733655aae2fc0c8e0c313fd09c6f8fd80ee9b5f832cf9d8bf",
+                "size": 882,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:b2fe2734ca5344f4ab6c321c3763e636a446f2f37b895a261fca953bea356c3c",
+                "size": 99,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              },
+              {
+                "digest": "sha256:c7bd8fa7fc8d2a3af20fbcb7e48b649e9687edab440b75b672a43027e364d135",
+                "size": 151892331,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip"
+              }
+            ]
+          },
+          {
+            "profile": "optimized-zstd19",
+            "compressed_layer_bytes": 355205604,
+            "layers": [
+              {
+                "digest": "sha256:1ea8b1f5665316f861c45290259aa97082a8498afd3c003604986ec35526c9d7",
+                "size": 23253819,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:c0f81337f3b85a770d4df237c3bd9a1461b2d4c0c180a330be0f4408bbfe7612",
+                "size": 16067998,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:97eab0e3aed6a25e79bcc1314253f88169f5cbdbd266343eccf13aa0f62bc8ac",
+                "size": 37446611,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:3a81cf07ce498b12e51813100ec10fe75b302cfa1bd43250a25fd4d1a6c391c9",
+                "size": 153995385,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:18862455e28bca7f68141a8c3c0e768b5e978fc64bf89c0317c6df7613766cce",
+                "size": 826,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:8fa161d4d42ec4bc9df17be02497ca44d6d709642f946a8a4725479af14ea1b0",
+                "size": 85,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              },
+              {
+                "digest": "sha256:0e3284682ff1037c3ac3e0993d1b11ac7a75dfb298602443f98488614a9c644d",
+                "size": 124440880,
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+zstd"
+              }
+            ]
+          }
+        ]
+      },
+      "payload": {
+        "before_bytes": {
+          "java": 308151757,
+          "node": 141211621
+        },
+        "after_bytes": {
+          "java": 197517996,
+          "node": 121177941
+        },
+        "node_native_symbols_stripped": true,
+        "jdk_modules": [
+          "java.base@21.0.12.1",
+          "java.compiler@21.0.12.1",
+          "java.datatransfer@21.0.12.1",
+          "java.desktop@21.0.12.1",
+          "java.instrument@21.0.12.1",
+          "java.logging@21.0.12.1",
+          "java.management.rmi@21.0.12.1",
+          "java.management@21.0.12.1",
+          "java.naming@21.0.12.1",
+          "java.net.http@21.0.12.1",
+          "java.prefs@21.0.12.1",
+          "java.rmi@21.0.12.1",
+          "java.scripting@21.0.12.1",
+          "java.se@21.0.12.1",
+          "java.security.jgss@21.0.12.1",
+          "java.security.sasl@21.0.12.1",
+          "java.smartcardio@21.0.12.1",
+          "java.sql.rowset@21.0.12.1",
+          "java.sql@21.0.12.1",
+          "java.transaction.xa@21.0.12.1",
+          "java.xml.crypto@21.0.12.1",
+          "java.xml@21.0.12.1",
+          "jdk.accessibility@21.0.12.1",
+          "jdk.attach@21.0.12.1",
+          "jdk.charsets@21.0.12.1",
+          "jdk.compiler@21.0.12.1",
+          "jdk.crypto.cryptoki@21.0.12.1",
+          "jdk.crypto.ec@21.0.12.1",
+          "jdk.dynalink@21.0.12.1",
+          "jdk.editpad@21.0.12.1",
+          "jdk.hotspot.agent@21.0.12.1",
+          "jdk.httpserver@21.0.12.1",
+          "jdk.incubator.vector@21.0.12.1",
+          "jdk.internal.ed@21.0.12.1",
+          "jdk.internal.jvmstat@21.0.12.1",
+          "jdk.internal.le@21.0.12.1",
+          "jdk.internal.opt@21.0.12.1",
+          "jdk.internal.vm.ci@21.0.12.1",
+          "jdk.internal.vm.compiler.management@21.0.12.1",
+          "jdk.internal.vm.compiler@21.0.12.1",
+          "jdk.jartool@21.0.12.1",
+          "jdk.javadoc@21.0.12.1",
+          "jdk.jcmd@21.0.12.1",
+          "jdk.jconsole@21.0.12.1",
+          "jdk.jdeps@21.0.12.1",
+          "jdk.jdi@21.0.12.1",
+          "jdk.jdwp.agent@21.0.12.1",
+          "jdk.jfr@21.0.12.1",
+          "jdk.jlink@21.0.12.1",
+          "jdk.jpackage@21.0.12.1",
+          "jdk.jshell@21.0.12.1",
+          "jdk.jsobject@21.0.12.1",
+          "jdk.jstatd@21.0.12.1",
+          "jdk.localedata@21.0.12.1",
+          "jdk.management.agent@21.0.12.1",
+          "jdk.management.jfr@21.0.12.1",
+          "jdk.management@21.0.12.1",
+          "jdk.naming.dns@21.0.12.1",
+          "jdk.naming.rmi@21.0.12.1",
+          "jdk.net@21.0.12.1",
+          "jdk.nio.mapmode@21.0.12.1",
+          "jdk.random@21.0.12.1",
+          "jdk.sctp@21.0.12.1",
+          "jdk.security.auth@21.0.12.1",
+          "jdk.security.jgss@21.0.12.1",
+          "jdk.unsupported.desktop@21.0.12.1",
+          "jdk.unsupported@21.0.12.1",
+          "jdk.xml.dom@21.0.12.1",
+          "jdk.zipfs@21.0.12.1"
+        ],
+        "jdk_module_count": 69,
+        "jmod_entries_sha256_verified": 28818,
+        "jmods_before_bytes": 85739323,
+        "jmods_after_bytes": 85118002,
+        "regenerable_cds_removed_bytes": 29884416
+      },
+      "checks": {
+        "baseline": {
+          "functional": "passed",
+          "jdk_node_extended": "passed"
+        },
+        "compact": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 2674
+        },
+        "test": {
+          "functional": "passed",
+          "jdk_node_extended": "passed",
+          "elf_paths_checked": 2674
+        }
+      },
+      "module_sets_equal": true,
+      "sbom_packages": 371,
+      "severity_counts": {
+        "MEDIUM": 1969,
+        "LOW": 714,
+        "CRITICAL": 14,
+        "HIGH": 372
+      },
+      "high_critical": 386,
+      "high_critical_packages": {
+        "linux-libc-dev": 386
+      },
+      "upstream": {
+        "ubuntu": "sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac",
+        "node": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+        "java": "sha256:107215954359f1ab0be058a247d7c64ed6e69c71c1682d471d38ef751ec8e964"
+      }
+    }
+  ]
+}

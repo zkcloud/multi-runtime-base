@@ -59,27 +59,43 @@ jobs:
             UBUNTU_IMAGE=${{ steps.upstream.outputs.ubuntu }}
             NODE_IMAGE=${{ steps.upstream.outputs.node }}
             JAVA_IMAGE=${{ steps.upstream.outputs.java }}
-          cache-from: type=gha,scope=${{ matrix.arch }}-${{ matrix.variant }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.arch }}-${{ matrix.variant }}
+          cache-from: type=gha,scope=min-${{ matrix.arch }}-${{ matrix.variant }}
+          cache-to: type=gha,mode=max,scope=min-${{ matrix.arch }}-${{ matrix.variant }}
           provenance: false
-      - name: Record build metadata
-        env:
-          METADATA: ${{ steps.optimized.outputs.metadata }}
-        run: printf '%s\n' "$METADATA" > reports/build-metadata.json
-      - name: Build untrimmed reference
+      - name: Build compact profile without Node stripping
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
         with:
           context: .
           target: ${{ matrix.variant }}
           platforms: linux/${{ matrix.arch }}
           load: true
-          tags: local/${{ matrix.variant }}:baseline
+          tags: local/${{ matrix.variant }}:compact
           build-args: |
-            TRIM=0
+            TRIM=1
+            STRIP_NODE=0
             UBUNTU_IMAGE=${{ steps.upstream.outputs.ubuntu }}
             NODE_IMAGE=${{ steps.upstream.outputs.node }}
             JAVA_IMAGE=${{ steps.upstream.outputs.java }}
-          cache-from: type=gha,scope=${{ matrix.arch }}-${{ matrix.variant }}
+          provenance: false
+      - name: Record build metadata
+        env:
+          METADATA: ${{ steps.optimized.outputs.metadata }}
+        run: printf '%s\n' "$METADATA" > reports/build-metadata.json
+      - name: Build frozen current-main reference
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+        with:
+          context: .
+          target: ${{ matrix.variant }}
+          platforms: linux/${{ matrix.arch }}
+          load: true
+          file: Dockerfile.reference
+          tags: local/${{ matrix.variant }}:baseline
+          build-args: |
+            TRIM=1
+            UBUNTU_IMAGE=${{ steps.upstream.outputs.ubuntu }}
+            NODE_IMAGE=${{ steps.upstream.outputs.node }}
+            JAVA_IMAGE=${{ steps.upstream.outputs.java }}
+          cache-from: type=gha,scope=min-${{ matrix.arch }}-${{ matrix.variant }}
           provenance: false
       - name: Measure image sizes and layers
         env:
@@ -97,13 +113,46 @@ jobs:
           VARIANT: ${{ matrix.variant }}
         run: |
           set -euo pipefail
-          docker run --rm -v "$PWD/tests:/tests:ro" "local/$VARIANT:test" bash /tests/functional.sh "$VARIANT" 2>&1 | tee reports/functional.log
+          for profile in baseline compact test; do
+            docker run --rm -v "$PWD/tests:/tests:ro" "local/$VARIANT:$profile" bash /tests/functional.sh "$VARIANT" 2>&1 | tee "reports/functional-$profile.log"
+            docker run --rm -v "$PWD/tests:/tests:ro" "local/$VARIANT:$profile" bash /tests/optimization.sh "$VARIANT" 2>&1 | tee "reports/capabilities-$profile.log"
+            docker run --rm "local/$VARIANT:$profile" java --list-modules | sort > "reports/modules-$profile.txt"
+          done
+          cmp reports/modules-baseline.txt reports/modules-compact.txt
+          cmp reports/modules-baseline.txt reports/modules-test.txt
+          docker run --rm "local/$VARIANT:test" cat /usr/local/share/multi-runtime-optimization/payload.json > reports/payload.json
       - name: All ELF shared library dependencies
         env:
           VARIANT: ${{ matrix.variant }}
         run: |
           set -euo pipefail
-          docker run --rm -v "$PWD/tests:/tests:ro" "local/$VARIANT:test" python /tests/libraries.py 2>&1 | tee reports/libraries.log
+          for profile in compact test; do
+            docker run --rm -v "$PWD/tests:/tests:ro" "local/$VARIANT:$profile" python /tests/libraries.py 2>&1 | tee "reports/libraries-$profile.log"
+          done
+      - name: Measure actual gzip and zstd exports
+        env:
+          VARIANT: ${{ matrix.variant }}
+          ARCH: ${{ matrix.arch }}
+          UBUNTU: ${{ steps.upstream.outputs.ubuntu }}
+          NODE: ${{ steps.upstream.outputs.node }}
+          JAVA: ${{ steps.upstream.outputs.java }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/oci-size
+          for profile in baseline-gzip6 optimized-gzip9 optimized-zstd19; do
+            file=Dockerfile
+            codec=gzip
+            level=9
+            if [[ "$profile" == baseline-gzip6 ]]; then file=Dockerfile.reference; level=6; fi
+            if [[ "$profile" == optimized-zstd19 ]]; then codec=zstd; level=19; fi
+            docker buildx build -f "$file" --target "$VARIANT" --platform "linux/$ARCH" \
+              --build-arg TRIM=1 --build-arg "UBUNTU_IMAGE=$UBUNTU" \
+              --build-arg "NODE_IMAGE=$NODE" --build-arg "JAVA_IMAGE=$JAVA" \
+              --provenance=false \
+              --output "type=oci,dest=/tmp/oci-size/$profile,tar=false,compression=$codec,compression-level=$level,force-compression=true" .
+          done
+          python3 scripts/export_sizes.py /tmp/oci-size | tee reports/compression.json
+          rm -rf /tmp/oci-size
       - name: Trivy vulnerability report
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:

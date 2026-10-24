@@ -6,9 +6,13 @@
 
 ```bash
 for variant in base build; do
-  docker buildx build --target "$variant" --build-arg TRIM=0 --load -t "local/$variant:baseline" .
-  docker buildx build --target "$variant" --build-arg TRIM=1 --load -t "local/$variant:test" .
-  docker run --rm -v "$PWD/tests:/tests:ro" "local/$variant:test" bash /tests/functional.sh "$variant"
+  docker buildx build -f Dockerfile.reference --target "$variant" --load -t "local/$variant:baseline" .
+  docker buildx build --target "$variant" --build-arg STRIP_NODE=0 --load -t "local/$variant:compact" .
+  docker buildx build --target "$variant" --load -t "local/$variant:test" .
+  for profile in baseline compact test; do
+    docker run --rm -v "$PWD/tests:/tests:ro" "local/$variant:$profile" bash /tests/functional.sh "$variant"
+    docker run --rm -v "$PWD/tests:/tests:ro" "local/$variant:$profile" bash /tests/optimization.sh "$variant"
+  done
   docker run --rm -v "$PWD/tests:/tests:ro" "local/$variant:test" python /tests/libraries.py
   python3 scripts/measure.py "$variant" "$(uname -m)"
 done
@@ -33,3 +37,7 @@ base 不支持直接编译本地 C 扩展；选择 build。pip 安装到 venv。
 ## 扫描范围
 
 Trivy 对最终镜像中的 Ubuntu OS 包和可识别的语言依赖进行扫描，SPDX 记录识别到的组件；不能将它等同于对 Node/JDK 内嵌 C/C++ 依赖、JDK 自身所有 CVE 的完整验证。运行时版本保留于功能测试日志；企业仍应跟踪 Temurin CPU 和 Node 安全发布。GHCR 发布动作需在审核后执行，目前不能宣称其推送已实测通过。
+
+## 本轮大小优化
+
+默认 Dockerfile 已应用本轮最小化候选。严格对照以 CI 锁定的同组上游 digest 为准；本地连续构建也应传入相同 UBUNTU_IMAGE/NODE_IMAGE/JAVA_IMAGE 摘要。冻结的 Dockerfile.reference 是上一版 main 已裁剪实现。性能与原生诊断取舍、实际 gzip/zstd 数据见 [实测报告](minimization-results-2026-10-24.md)。
