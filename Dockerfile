@@ -45,6 +45,9 @@ RUN if [ "$TRIM" = 1 ]; then \
     ln -s /usr/bin/python3.12 /usr/local/bin/python3
 COPY --from=payload /payload/node/ /usr/local/
 COPY --from=payload /payload/java/ /opt/java/openjdk/
+LABEL org.opencontainers.image.source="https://github.com/zkcloud/multi-runtime-base" \
+      org.opencontainers.image.title="multi-runtime-base" \
+      org.opencontainers.image.description="Ubuntu 24.04, Python 3.12, Node 24 and Eclipse Temurin JDK 21"
 WORKDIR /workspace
 CMD ["/bin/bash"]
 
@@ -53,4 +56,5 @@ RUN apt-get update; \
     apt-get install -y --no-install-recommends \
       build-essential pkg-config python3.12-dev git cmake ninja-build; \
     if [ "$TRIM" = 1 ]; then rm -rf /var/lib/apt/lists/* /var/cache/apt/*; fi; \
-    ln -s /usr/bin/python3.12-config /usr/local/bin/python3-config
+    printf '#!/bin/sh\nexec /usr/bin/python3.12-config "$@"\n' > /usr/local/bin/python3-config; \
+    chmod 0755 /usr/local/bin/python3-config

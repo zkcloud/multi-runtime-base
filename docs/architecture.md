@@ -28,3 +28,5 @@ build 继承同一 base 阶段，保持共享层；cache scope 按架构和变�
 首轮 Trivy 检出官方 Node 载荷中 npm 的 brace-expansion、http-cache-semantics、undici 漏洞。载荷阶段升级官方 npm 11.21.1，并以无运行时依赖、兼容 Node 18.17+ 的 undici 6.29.1 替换 npm 内嵌的同一 6.x 依赖。两项版本均固定为 build ARG；这是显式供应链补丁，后续 npm 官方包含该修复时应移除此补丁。SBOM 和扫描以最终安装内容为准，不设置漏洞忽略项。
 
 上游依据：[npm 11.21.1](https://github.com/npm/cli/releases/tag/v11.21.1)、[undici 6.29.1](https://github.com/nodejs/undici/releases/tag/v6.29.1)。
+
+Python 的配置脚本按调用路径计算 prefix，因此 python3-config 使用 exec 包装器调用 /usr/bin/python3.12-config，不能直接从 /usr/local/bin 链接（实测会错误返回 /usr/local/include/python3.12）。build 测试实际编译和导入 C 扩展验证头文件位置。
