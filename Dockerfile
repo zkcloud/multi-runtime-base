@@ -3,6 +3,15 @@ ARG NODE_IMAGE=node:24-bookworm-slim
 ARG JAVA_IMAGE=eclipse-temurin:21-jdk-noble
 ARG UBUNTU_IMAGE=ubuntu:24.04
 FROM ${NODE_IMAGE} AS node
+ARG NPM_VERSION=11.21.1
+ARG UNDICI_VERSION=6.29.1
+# npm's official patch release fixes brace-expansion/http-cache-semantics.
+# Apply the newer compatible undici patch before copying the payload.
+RUN npm install --global "npm@${NPM_VERSION}" --ignore-scripts --no-audit --no-fund \
+    && npm install --prefix /tmp/npm-security "undici@${UNDICI_VERSION}" --ignore-scripts --no-audit --no-fund \
+    && rm -rf /usr/local/lib/node_modules/npm/node_modules/undici \
+    && cp -a /tmp/npm-security/node_modules/undici /usr/local/lib/node_modules/npm/node_modules/undici \
+    && rm -rf /tmp/npm-security /root/.npm
 FROM ${JAVA_IMAGE} AS java
 FROM ${UBUNTU_IMAGE} AS payload
 ARG TRIM=1
@@ -43,4 +52,5 @@ FROM base AS build
 RUN apt-get update; \
     apt-get install -y --no-install-recommends \
       build-essential pkg-config python3.12-dev git cmake ninja-build; \
-    if [ "$TRIM" = 1 ]; then rm -rf /var/lib/apt/lists/* /var/cache/apt/*; fi
+    if [ "$TRIM" = 1 ]; then rm -rf /var/lib/apt/lists/* /var/cache/apt/*; fi; \
+    ln -s /usr/bin/python3.12-config /usr/local/bin/python3-config
