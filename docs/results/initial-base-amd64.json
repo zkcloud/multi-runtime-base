@@ -1,0 +1,14 @@
+{
+  "variant": "base",
+  "architecture": "amd64",
+  "measured_at": "2026-10-24T03:48:54.006103+00:00",
+  "commit": "7cb22985b879e6bd099c16a28ca02bdf8fc54573",
+  "metric": "docker image inspect .Size (uncompressed image content bytes)",
+  "baseline_bytes": 660377938,
+  "optimized_bytes": 605546755,
+  "saved_bytes": 54831183,
+  "saved_percent": 8.303,
+  "baseline_id": "sha256:77aa2ab30d0a54465bcfa474b10aac3a31d5dbc0910828f509b8d9ce93718b62",
+  "optimized_id": "sha256:9ab28f2ba0afa04d066122251c48a6aa21a04397767c127aac09db265ee2cab9",
+  "compressed_registry_bytes": null
+}
