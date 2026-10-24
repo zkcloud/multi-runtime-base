@@ -17,7 +17,7 @@ flowchart TD
 
 完整 JDK 保留 bin、jmods、include、lib、legal；不使用 jlink 生成受限 JRE。仅移除可选 lib/src.zip。保留 npm、Node headers（原生扩展需要）以及所有包管理数据库。
 
-构建控制：固定 Action commit；镜像输入允许通过 build args 替换为企业审核过的 digest。初始 tag 随上游安全更新浮动，因此不能宣称可逐字节复现。Actions 上传 BuildKit metadata 记录实际解析的上游摘要；正式发布前建议把已验证的三组输入固定为多架构 index digest。
+构建控制：固定 Action commit；镜像输入允许通过 build args 替换为企业审核过的 digest。本地默认 tag 随上游安全更新浮动，因此不能宣称可逐字节复现。CI 先把三个上游 tag 解析成不可变多架构 index digest，优化/对照构建使用同一组摘要，报告保留 upstream-*.txt 和 BuildKit metadata。不同执行间 Ubuntu apt 仓库仍可能更新；严格历史复现应使用企业快照源。
 
 build 继承同一 base 阶段，保持共享层；cache scope 按架构和变体隔离。无 SSH、守护进程、密码、内置访问令牌。企业 CA 应在派生镜像中安装，不关闭 TLS 验证。
 
